@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Rectangles with Text Copy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div>
+        <div class="image-container" id="image-container">
+            <img id="image" src="{{ url_for('static', filename='uploaded_image.jpg') }}" alt="Fixed Size Image">
+            <canvas id="canvas"></canvas>
+        </div>
+        <input type="text" id="inputField" placeholder="Click a rectangle to copy text here">
+        <a href="/">Upload Another Image</a>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- <div class="footer">
+        <p>Made by <a href="https://github.com/your-profile">Sourabh Kumar</a></p>
+    </div> -->
+</body>
+</html>
