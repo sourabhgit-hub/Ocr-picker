@@ -48,5 +48,14 @@ def main(img_path):
 
     return all_data
 
+@app.route('/output', methods=['POST'])
+def receive_data():
+  try:
+    data = request.get_json()
+    # Process the received data (e.g., store it in a database)
+    return jsonify({'message': 'Data received successfully!'}), 200
+  except Exception as e:
+    return jsonify({'error': str(e)}), 400
+
 if __name__ == '__main__':
     app.run(debug=True)
