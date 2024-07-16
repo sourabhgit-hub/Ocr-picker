@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function ImageViewer({ uploadedImage }) {
+  const [formData, setFormData] = useState({
+    type: "",
+    amount: "",
+    unit: "",
+    financial_year: "",
+  });
   const [inputs, setInputs] = useState([]);
   const [zoom, setZoom] = useState(1);
-  
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const [rectangles, setRectangles] = useState([]);
@@ -91,15 +97,46 @@ function ImageViewer({ uploadedImage }) {
       }
     });
   };
-  
-  const addInputField = (text) => {
-    setInputs([...inputs, text]);
+
+  const addInputField = () => {
+    setInputs([...inputs, { "": "" }]);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    const jsonData = JSON.stringify(formData); // Convert formData to JSON string
+
+    
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/output", // Replace with your backend URL
+        formData, // Still send the original formData object
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Sent JSON Object:", jsonData); // This logs the converted JSON
+      console.log("Response from backend:", response.data); // Handle successful response
+    } catch (error) {
+      console.error("Error sending data to backend:", error); // Handle errors
+    }
   };
 
 
-  const handleZoom = (factor) => {
-    setZoom((prevZoom) => Math.max(0.1, Math.min(prevZoom + factor, 3)));
-  };
+  // const handleZoom = (factor) => {
+  //   setZoom((prevZoom) => Math.max(0.1, Math.min(prevZoom + factor, 3)));
+  // };
 
   return (
     <div className="container mx-auto p-4">
@@ -113,7 +150,7 @@ function ImageViewer({ uploadedImage }) {
             >
               Upload Another Image
             </Link>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <button
                 onClick={() => handleZoom(0.1)}
                 className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
@@ -126,7 +163,7 @@ function ImageViewer({ uploadedImage }) {
               >
                 Zoom Out
               </button>
-            </div>
+            </div> */}
           </div>
           <div id="image-container" className="relative">
             <img
@@ -150,23 +187,68 @@ function ImageViewer({ uploadedImage }) {
         {/* Right side - Fields */}
         <div className="md:w-1/2 pl-4 mt-4 md:mt-0">
           <h2 className="text-2xl font-bold mb-4">Fields</h2>
-          <div id="inputContainer" className="space-y-2">
-            {inputs.map((input, index) => (
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="type" className="block mb-1">
+                Type:
+              </label>
               <input
-                key={index}
                 type="text"
-                value={input}
-                readOnly
+                id="type"
+                name="type"
+                value={formData.type}
+                onChange={handleInputChange}
                 className="w-full p-2 border border-gray-300 rounded"
               />
-            ))}
+            </div>
+            <div>
+              <label htmlFor="amount" className="block mb-1">
+                Amount:
+              </label>
+              <input
+                type="text"
+                id="amount"
+                name="amount"
+                value={formData.amount}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="unit" className="block mb-1">
+                Unit:
+              </label>
+              <input
+                type="text"
+                id="unit"
+                name="unit"
+                value={formData.unit}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="financial_year" className="block mb-1">
+                Financial Year:
+              </label>
+              <input
+                type="text"
+                id="financial_year"
+                name="financial_year"
+                value={formData.financial_year}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
           </div>
-          <button
-            onClick={() => addInputField()}
-            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Add Input
-          </button>
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={handleSubmit}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>

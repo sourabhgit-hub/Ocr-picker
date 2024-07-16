@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import './index.css';
+import './index.css';
 import App from './App';
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
