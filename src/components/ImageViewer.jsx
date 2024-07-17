@@ -1,17 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Fields from "./Fields";
-import ImageCanvas from "./Canvas";
+import Canvas from "./Canvas";
 
 function ImageViewer({ uploadedImage }) {
+  const location = useLocation();
+  const selectedBillType = location.state?.billType || "";
+
   const [formData, setFormData] = useState({
-    type: "",
-    amount: "",
+    type_of_bill: selectedBillType,
+    bill_parameter_1: "",
+    bill_parameter_2: "",
+    bill_parameter_3: "",
     unit: "",
-    financial_year: "",
+    amount: "",
+    date: "",
   });
   const [activeField, setActiveField] = useState(null);
+
+  useEffect(() => {
+    setFormData((prevState) => ({
+      ...prevState,
+      type_of_bill: selectedBillType,
+    }));
+  }, [selectedBillType]);
 
   const handleInputFocus = (field) => {
     setActiveField(field);
@@ -27,7 +40,10 @@ function ImageViewer({ uploadedImage }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const jsonData = JSON.stringify(formData);
+    const jsonData = JSON.stringify({
+      type_of_bill: selectedBillType,
+      ...formData,
+    });
     try {
       const response = await axios.post(
         "http://localhost:5000/output",
@@ -56,8 +72,9 @@ function ImageViewer({ uploadedImage }) {
             >
               Upload Another Image
             </Link>
+            <p className="mb-4">Selected Bill Type: {selectedBillType}</p>
           </div>
-          <ImageCanvas
+          <Canvas
             uploadedImage={uploadedImage}
             activeField={activeField}
             setFormData={setFormData}
@@ -69,6 +86,7 @@ function ImageViewer({ uploadedImage }) {
           handleInputChange={handleInputChange}
           handleInputFocus={handleInputFocus}
           handleSubmit={handleSubmit}
+          selectedBillType={selectedBillType}
         />
       </div>
     </div>
