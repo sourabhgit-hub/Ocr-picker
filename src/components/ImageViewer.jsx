@@ -61,13 +61,16 @@ function ImageViewer({ uploadedImage }) {
               >
                 Upload Another Image
               </Link>
-              {/* <p className="mb-4">Selected Bill Type: {selectedBillType}</p> */}
             </div>
-            <Canvas
-              uploadedImage={uploadedImage}
-              activeField={activeField}
-              setFormData={setFormData}
-            />
+            <div className="overflow-auto max-w-full max-h-[600px] border border-gray-300 rounded">
+              <div className="min-w-[800px] min-h-[600px]">
+                <Canvas
+                  uploadedImage={uploadedImage}
+                  activeField={activeField}
+                  setFormData={setFormData}
+                />
+              </div>
+            </div>
           </div>
           <div className="hidden md:block w-px bg-gray-200 mx-4"></div>
           <Fields
