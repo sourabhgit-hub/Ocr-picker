@@ -1,4 +1,19 @@
 import React from "react";
+import Bioenergy from "./labels/Bioenergy";
+import Refrigerants from "./labels/Refrigerants";
+import Electricity from "./labels/Electricity";
+import OwnedVehicles from "./labels/OwnedVehicles";
+import WTTFuel from "./labels/WTTFuel";
+import MaterialsUsed from "./labels/MaterialsUsed";
+import WasteDisposal from "./labels/WasteDisposal";
+import BusinessTravel from "./labels/BusinessTravel";
+import FreightingGoods from "./labels/FreightingGoods";
+import EmployCommuting from "./labels/EmployCommuting";
+import Food from "./labels/Food";
+import Water from "./labels/Water";
+import Fuels from "./labels/Fuels";
+import Home from "./labels/Home";
+import FlightsAndAccommodations from "./labels/FlightsAndAccommodations";
 
 const Fields = ({
   formData,
@@ -7,6 +22,134 @@ const Fields = ({
   handleSubmit,
   selectedBillType,
 }) => {
+  const renderBillComponent = () => {
+    switch (selectedBillType) {
+      case "Fuels":
+        return (
+          <Fuels
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "Bioenergy":
+        return (
+          <Bioenergy
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "Refrigerants":
+        return (
+          <Refrigerants
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "Electricity":
+        return (
+          <Electricity
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "OwnedVehicles":
+        return (
+          <OwnedVehicles
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "WTTFuel":
+        return (
+          <WTTFuel
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "MaterialsUsed":
+        return (
+          <MaterialsUsed
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "WasteDisposal":
+        return (
+          <WasteDisposal
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "Flights & Accomodations":
+        return (
+          <FlightsAndAccommodations
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+
+      case "BusinessTravel":
+        return (
+          <BusinessTravel
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "FreightingGoods":
+        return (
+          <FreightingGoods
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "EmployCommuting":
+        return (
+          <EmployCommuting
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "Food":
+        return (
+          <Food
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "Water":
+        return (
+          <Water
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      case "Home":
+        return (
+          <Home
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleInputFocus={handleInputFocus}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="md:w-1/2 pl-4 mt-4 md:mt-0">
       <h2 className="text-2xl font-bold mb-4">Fields</h2>
@@ -15,85 +158,8 @@ const Fields = ({
           <label htmlFor="type_of_bill" className="block mb-1">
             Type of Bill:
           </label>
-          <input
-            type="text"
-            id="type_of_bill"
-            name="type_of_bill"
-            value={selectedBillType}
-            readOnly
-            className="w-full p-2 border border-gray-300 rounded bg-gray-100"
-          />
         </div>
-        <div>
-          <label htmlFor="bill_parameter_1" className="block mb-1">
-            Bill parameter 1:
-          </label>
-          <input
-            type="text"
-            id="bill_parameter_1"
-            name="bill_parameter_1"
-            value={formData.bill_parameter_1}
-            onChange={handleInputChange}
-            onFocus={() => handleInputFocus("bill_parameter_1")}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-        <div>
-          <label htmlFor="bill_parameter_2" className="block mb-1">
-            Bill parameter 2:
-          </label>
-          <input
-            type="text"
-            id="bill_parameter_2"
-            name="bill_parameter_2"
-            value={formData.bill_parameter_2}
-            onChange={handleInputChange}
-            onFocus={() => handleInputFocus("bill_parameter_2")}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-        <div>
-          <label htmlFor="bill_parameter_3" className="block mb-1">
-            Bill parameter 3:
-          </label>
-          <input
-            type="text"
-            id="bill_parameter_3"
-            name="bill_parameter_3"
-            value={formData.bill_parameter_3}
-            onChange={handleInputChange}
-            onFocus={() => handleInputFocus("bill_parameter_3")}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-        <div>
-          <label htmlFor="unit" className="block mb-1">
-            Unit:
-          </label>
-          <input
-            type="text"
-            id="unit"
-            name="unit"
-            value={formData.unit}
-            onChange={handleInputChange}
-            onFocus={() => handleInputFocus("unit")}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-        <div>
-          <label htmlFor="amount" className="block mb-1">
-            Amount:
-          </label>
-          <input
-            type="text"
-            id="amount"
-            name="amount"
-            value={formData.amount}
-            onChange={handleInputChange}
-            onFocus={() => handleInputFocus("amount")}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
+        {renderBillComponent()}
         <div>
           <label htmlFor="date" className="block mb-1">
             Date:

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import ImageUploader from './components/ImageUploader';
 import ImageViewer from './components/ImageViewer';
-import WorldMap from "./components/WorldMap";
+import WorldMap from "./components/map/WorldMap";
  
 function App() {
   const [uploadedImage, setUploadedImage] = useState(null);
