@@ -152,7 +152,7 @@ const Fields = ({
 
   return (
     <div className="md:w-1/2 pl-4 mt-4 md:mt-0">
-      <h2 className="text-2xl font-bold mb-4">Fields</h2>
+      {/* <h2 className="text-2xl font-bold mb-4">Fields</h2> */}
       <div className="space-y-4">
         <div>
           <label htmlFor="type_of_bill" className="block mb-1">
