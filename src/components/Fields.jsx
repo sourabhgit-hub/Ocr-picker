@@ -14,6 +14,8 @@ import Water from "./labels/Water";
 import Fuels from "./labels/Fuels";
 import Home from "./labels/Home";
 import FlightsAndAccommodations from "./labels/FlightsAndAccommodations";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Fields = ({
   formData,
@@ -150,6 +152,40 @@ const Fields = ({
     }
   };
 
+  const handleSubmitWithToast = async () => {
+    try {
+      const result = await handleSubmit();
+      if (result) {
+        toast.success("Form submitted successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        toast.error("Form submission failed. Please try again.", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    } catch (error) {
+      toast.error(`An error occurred: ${error.message}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
+
   return (
     <div className="md:w-1/2 pl-4 mt-4 md:mt-0">
       {/* <h2 className="text-2xl font-bold mb-4">Fields</h2> */}
@@ -177,12 +213,13 @@ const Fields = ({
       </div>
       <div className="flex justify-end mt-4">
         <button
-          onClick={handleSubmit}
+          onClick={handleSubmitWithToast}
           className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
         >
           Submit
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

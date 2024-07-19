@@ -28,25 +28,27 @@ function ImageViewer({ uploadedImage }) {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const jsonData = JSON.stringify(formData);
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/output",
-        jsonData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Sent JSON Object:", jsonData);
-      console.log("Response from backend:", response.data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+const handleSubmit = async (event) => {
+  // event.preventDefault();
+  const jsonData = JSON.stringify(formData);
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/output",
+      jsonData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Sent JSON Object:", jsonData);
+    console.log("Response from backend:", response.data);
+    return true;  
+  } catch (error) {
+    console.error("Error:", error);
+    return false;  
+  }
+};
 
   return (
     <>
