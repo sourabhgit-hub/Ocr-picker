@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import Fields from "./Fields";
-import Canvas from "./Canvas";
-import Header from "./Header";
+import Fields from "../Fields";
+import Canvas from "../Canvas";
+import Header from "../Header";
 
 function ImageViewer({ uploadedImage }) {
   const location = useLocation();

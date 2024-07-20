@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Header from "./Header";
+import Header from "../Header";
 
 function ImageUploader({ setUploadedImage }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -45,6 +45,10 @@ function ImageUploader({ setUploadedImage }) {
       console.error("Error:", error);
       alert("Failed to upload image");
     }
+  };
+
+  const handleCRMIntegrationClick = () => {
+    navigate("/crm-integration");
   };
 
   const billTypes = [
@@ -96,6 +100,12 @@ function ImageUploader({ setUploadedImage }) {
             Upload
           </button>
         </form>
+        <button
+          onClick={handleCRMIntegrationClick}
+          className="mt-4 bg-green-500 text-white py-2 px-4 rounded-md font-medium hover:bg-green-700"
+        >
+          Go to CRM Integration
+        </button>
       </div>
     </>
   );
