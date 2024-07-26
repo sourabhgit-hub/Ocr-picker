@@ -21,7 +21,7 @@ class ImageProcessor:
     # grayscale
     def preprocess_image(self):
         self.grayscale()
-        self.binarize(150)
+        # self.binarize(150)
         # self.remove_noise()
 
     def grayscale(self):
